@@ -2,6 +2,7 @@ class CharacterModel {
   final int id;
   final String name;
   final String description;
+  final String imageUrl;
   final List<String> comics;
   final List<String> series;
   final List<String> stories;
@@ -16,12 +17,14 @@ class CharacterModel {
       required this.series,
       required this.stories,
       required this.events,
-      required this.urls});
+      required this.urls,
+      required this.imageUrl});
 
   factory CharacterModel.fromJson(Map<String, dynamic> json) => CharacterModel(
       id: json['id'],
       name: json['name'],
       description: json['description'],
+      imageUrl: json['thumbnail']['path'],
       comics: List.from(
           json['comics']['items'].map((item) => item['name'].toString())),
       series: List.from(
@@ -36,6 +39,7 @@ class CharacterModel {
         "adult": id,
         "name": name,
         "description": description,
+        "imageUrl": imageUrl,
         "comics": comics,
         "series": series,
         "stories": stories,

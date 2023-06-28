@@ -1,10 +1,10 @@
 name: dd360_test
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=3.1.0-110.0.dev <4.0.0'
+  sdk: ">=3.1.0-110.0.dev <4.0.0"
 
 dependencies:
   animate_do: ^3.0.2
@@ -23,3 +23,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - .env

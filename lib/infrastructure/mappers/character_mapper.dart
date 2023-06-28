@@ -6,5 +6,6 @@ class CharacterMapper {
       CharacterEntity(
           id: character.id,
           name: character.name,
-          description: character.description);
+          description: character.description,
+          imageUrl: character.imageUrl);
 }
