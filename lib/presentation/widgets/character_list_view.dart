@@ -40,39 +40,44 @@ class _Slide extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme;
-
     return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(width: 0.1),
-          borderRadius: BorderRadius.circular(10),
+      padding: const EdgeInsets.all(12),
+      child: Stack(clipBehavior: Clip.none, children: [
+        SizedBox(
+          width: double.infinity,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: _CharacterImage(character: character),
+          ),
         ),
-        margin: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-          SizedBox(
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: _CharacterImage(character: character),
+        Positioned.fill(
+          child: IgnorePointer(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: const DecoratedBox(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          stops: [0.6, 1.0],
+                          colors: [Colors.transparent, Colors.black87]))),
+            ),
+          ),
+        ),
+        Positioned.fill(
+            bottom: 20,
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Text(
+                character.name,
+                maxLines: 2,
+                style: const TextStyle(
+                    fontSize: 28,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
               ),
-            ),
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          SizedBox(
-            child: Text(
-              character.name,
-              maxLines: 2,
-              style: textStyle.titleLarge,
-            ),
-          ),
-        ]),
-      ),
+            )),
+      ]),
     );
   }
 }
@@ -92,7 +97,7 @@ class _CharacterImage extends StatelessWidget {
 
     return Image.network(
       getImageUrl,
-      fit: BoxFit.fill,
+      fit: BoxFit.cover,
       height: 350,
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress != null) {
@@ -105,17 +110,17 @@ class _CharacterImage extends StatelessWidget {
             ),
           );
         }
-        return GestureDetector(
+        return InkWell(
             onTap: () => context.push('/character', extra: character),
             child: FadeInRight(child: child));
       },
       errorBuilder: (context, exception, stackTrace) {
-        return GestureDetector(
+        return InkWell(
             onTap: () => context.push('/character', extra: character),
             child: FadeInRight(
                 child: Image.network(
               'https://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg',
-              fit: BoxFit.fill,
+              fit: BoxFit.cover,
               height: 350,
             )));
       },

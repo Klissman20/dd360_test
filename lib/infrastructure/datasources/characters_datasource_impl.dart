@@ -17,7 +17,7 @@ class CharactersDatasourceImpl extends CharactersDatasource {
 
   String generateMd5Hash(int timeStamp, String privateKey, String publicKey) {
     return md5
-        .convert(utf8.encode('${timeStamp.toString()}$privateKey$publicKey'))
+        .convert(utf8.encode('$timeStamp$privateKey$publicKey'))
         .toString();
   }
 
