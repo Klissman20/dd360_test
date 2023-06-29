@@ -19,7 +19,7 @@ class CharacterApiResponse {
           copyright: json['copyright'],
           results: List<CharacterModel>.from(
               json["data"]['results'].map((x) => CharacterModel.fromJson(x))),
-          attributionText: json['copyright'],
-          attributionHTML: json['copyright'],
-          etag: json['copyright']);
+          attributionText: json['attributionText'],
+          attributionHTML: json['attributionHTML'],
+          etag: json['etag']);
 }

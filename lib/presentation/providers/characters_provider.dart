@@ -18,7 +18,7 @@ class CharactersNotifier extends StateNotifier<List<CharacterEntity>> {
     final List<CharacterEntity> characters =
         await ref.watch(characterRepositoryProvider).getCharacters();
     state = [...state, ...characters];
-    await Future.delayed(const Duration(milliseconds: 300));
+    await Future.delayed(const Duration(milliseconds: 500));
     isLoading = false;
   }
 }

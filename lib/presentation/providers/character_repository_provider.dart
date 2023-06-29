@@ -2,7 +2,8 @@ import 'package:dd360_test/infrastructure/datasources/characters_datasource_impl
 import 'package:dd360_test/infrastructure/repositories/characters_repository_impl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-//immutable repository
+//immutables repositories
+
 final characterRepositoryProvider = Provider((ref) {
   return CharacterRepositoryImpl(CharactersDatasourceImpl());
 });

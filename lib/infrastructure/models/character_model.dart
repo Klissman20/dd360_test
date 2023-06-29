@@ -3,47 +3,27 @@ class CharacterModel {
   final String name;
   final String description;
   final String imageUrl;
-  final List<String> comics;
-  final List<String> series;
-  final List<String> stories;
-  final List<String> events;
   final List<String> urls;
 
   CharacterModel(
       {required this.id,
       required this.name,
       required this.description,
-      required this.comics,
-      required this.series,
-      required this.stories,
-      required this.events,
       required this.urls,
       required this.imageUrl});
 
   factory CharacterModel.fromJson(Map<String, dynamic> json) => CharacterModel(
       id: json['id'],
-      name: json['name'],
-      description: json['description'],
-      imageUrl: json['thumbnail']['path'],
-      comics: List.from(
-          json['comics']['items'].map((item) => item['name'].toString())),
-      series: List.from(
-          json['series']['items'].map((item) => item['name'].toString())),
-      stories: List.from(
-          json['stories']['items'].map((item) => item['name'].toString())),
-      events: List.from(
-          json['events']['items'].map((item) => item['name'].toString())),
-      urls: List.from(json['urls'].map((item) => item['url'].toString())));
+      name: json['name'] ?? json['title'],
+      description: json['description'] ?? 'No Description',
+      imageUrl: json['thumbnail']['path'] ?? 'No Image',
+      urls: List.from(json['urls'].map((item) => item['url'])));
 
   Map<String, dynamic> toJson() => {
-        "adult": id,
+        "id": id,
         "name": name,
         "description": description,
         "imageUrl": imageUrl,
-        "comics": comics,
-        "series": series,
-        "stories": stories,
-        "events": events,
         "urls": urls
       };
 }

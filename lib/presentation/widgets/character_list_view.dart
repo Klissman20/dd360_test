@@ -1,6 +1,7 @@
 import 'package:dd360_test/domain/entities/character_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:go_router/go_router.dart';
 
 class CharacterListView extends StatefulWidget {
   final List<CharacterEntity> characterList;
@@ -55,8 +56,8 @@ class _Slide extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: _CharacterImage(imageUrl: character.imageUrl),
+                borderRadius: BorderRadius.circular(10),
+                child: _CharacterImage(character: character),
               ),
             ),
           ),
@@ -78,21 +79,21 @@ class _Slide extends StatelessWidget {
 
 class _CharacterImage extends StatelessWidget {
   const _CharacterImage({
-    required this.imageUrl,
+    required this.character,
   });
 
-  final String imageUrl;
+  final CharacterEntity character;
 
   @override
   Widget build(BuildContext context) {
-    final getImageUrl = (imageUrl.endsWith('available'))
-        ? '$imageUrl.jpg'
-        : '$imageUrl/standard_xlarge.jpg';
+    final getImageUrl = (character.imageUrl.endsWith('available'))
+        ? '${character.imageUrl}.jpg'
+        : '${character.imageUrl}/detail.jpg';
 
     return Image.network(
       getImageUrl,
-      fit: BoxFit.cover,
-      width: 150,
+      fit: BoxFit.fill,
+      height: 350,
       loadingBuilder: (context, child, loadingProgress) {
         if (loadingProgress != null) {
           return const Padding(
@@ -104,11 +105,19 @@ class _CharacterImage extends StatelessWidget {
             ),
           );
         }
-        return FadeInRight(child: child);
+        return GestureDetector(
+            onTap: () => context.push('/character', extra: character),
+            child: FadeInRight(child: child));
       },
       errorBuilder: (context, exception, stackTrace) {
-        return Image.network(
-            'https://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg');
+        return GestureDetector(
+            onTap: () => context.push('/character', extra: character),
+            child: FadeInRight(
+                child: Image.network(
+              'https://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg',
+              fit: BoxFit.fill,
+              height: 350,
+            )));
       },
     );
   }

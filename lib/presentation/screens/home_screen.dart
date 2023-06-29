@@ -34,7 +34,6 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   @override
   void initState() {
     super.initState();
-
     ref.read(characterListProvider.notifier).fetchCharacters();
   }
 
