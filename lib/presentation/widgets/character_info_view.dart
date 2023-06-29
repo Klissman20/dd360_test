@@ -99,19 +99,6 @@ class _Slide extends StatelessWidget {
             style: textStyle.titleSmall,
           ),
         ),
-        Row(
-          children: [
-            Icon(
-              Icons.star_half_outlined,
-              color: Colors.yellow.shade800,
-            ),
-            const SizedBox(
-              width: 3,
-            ),
-
-            // Text('${movie.popularity}', style: textStyle.bodySmall)
-          ],
-        )
       ]),
     );
   }
@@ -124,13 +111,15 @@ class _Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final titleStyle = Theme.of(context).textTheme.titleLarge;
     return Container(
-      padding: const EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.only(top: 10, bottom: 5),
       margin: const EdgeInsets.symmetric(horizontal: 10),
       child: Row(
         children: [
-          if (title != null) Text(title!, style: titleStyle),
+          if (title != null)
+            Text(title!,
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
           const Spacer(),
           if (subTitle != null)
             FilledButton.tonal(
