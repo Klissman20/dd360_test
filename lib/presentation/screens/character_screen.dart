@@ -51,11 +51,22 @@ class CharacterScreenState extends ConsumerState<CharacterScreen> {
             return Column(
               children: [
                 const SizedBox(height: 10),
-                DataHorizontalListView(characterData: comics, title: 'Comics'),
-                DataHorizontalListView(characterData: events, title: 'Events'),
-                DataHorizontalListView(characterData: series, title: 'Series'),
-                DataHorizontalListView(
-                    characterData: stories, title: 'Stories'),
+                (comics.isNotEmpty)
+                    ? DataHorizontalListView(
+                        characterData: comics, title: 'Comics')
+                    : const SizedBox(),
+                (events.isNotEmpty)
+                    ? DataHorizontalListView(
+                        characterData: events, title: 'Events')
+                    : const SizedBox(),
+                (series.isNotEmpty)
+                    ? DataHorizontalListView(
+                        characterData: series, title: 'Series')
+                    : const SizedBox(),
+                (series.isNotEmpty)
+                    ? DataHorizontalListView(
+                        characterData: stories, title: 'Stories')
+                    : const SizedBox(),
               ],
             );
           }, childCount: 1))
@@ -91,6 +102,23 @@ class _CustomSliverAppBar extends StatelessWidget {
               ),
             ),
           ),
+        ),
+        const SizedBox.expand(
+          child: DecoratedBox(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      stops: [0.7, 1.0],
+                      colors: [Colors.transparent, Colors.black87]))),
+        ),
+        const SizedBox.expand(
+          child: DecoratedBox(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      stops: [0.0, 0.3],
+                      colors: [Colors.black87, Colors.transparent]))),
         ),
         FlexibleSpaceBar(
           titlePadding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),

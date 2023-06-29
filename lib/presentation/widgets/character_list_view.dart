@@ -86,7 +86,7 @@ class _CharacterImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final getImageUrl = (character.imageUrl.endsWith('available'))
+    final getImageUrl = (character.imageUrl!.endsWith('available'))
         ? '${character.imageUrl}.jpg'
         : '${character.imageUrl}/detail.jpg';
 
